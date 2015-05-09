@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+<p align= "center">
+			 Order Online
+		</p>
+
+<table id="foodItem" align = "center">
+			<tr>
+				<th>Food Items</th>
+				<th>Ingredients</th>
+				<th>Price</th>
+				<th>Select</th>
+				
+			</tr>
+			<tr ng-repeat="food in foods ">
+			   
+				<td>{{food.foodItems}}</td>
+				<td>{{food.ingredients}}</td>
+				<td>{{food.price}}</td>
+				<td> <input type="checkbox" name="foodSelected" ng-model="food.foodSelected"></td>
+				
+			</tr>
+			
+		</table>
+		<table align = "center">
+		<td><button class="btn" ng-click="orderOnline()" align ="center">
+      Order Online
+      </button> </td>
+		</table>
+		
+</body>
+</html>
