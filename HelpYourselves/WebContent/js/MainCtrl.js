@@ -1,3 +1,3 @@
-angular.module('App').controller('MainCtrl',MainCtrl);
+angular.module('App').controller('MainCtrl', MainCtrl);
 
-function MainCtrl($scope){};
+function MainCtrl($scope){};

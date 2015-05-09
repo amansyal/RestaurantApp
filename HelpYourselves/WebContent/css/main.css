@@ -1,5 +1,5 @@
 body {
-    display: fixed;
+    position: fixed;
     margin: 0;
     overflow-y: scroll;
     top: 0;
@@ -77,4 +77,13 @@ body > footer {
 .menu-item {
     height: 200px;
     margin: 10px;
+}
+
+.tab > a {
+    text-decoration: none;
+}
+
+.tab > a:visited,
+.tab > a:link {
+    color: inherit;
 }

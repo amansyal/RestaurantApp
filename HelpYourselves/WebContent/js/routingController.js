@@ -1,38 +1,37 @@
 angular.module('App').config(function($routeProvider,$locationProvider){
 $routeProvider.when("/",
 		{
-		templateUrl:"/HelpYourselves/html/index.html",
 		controller:"MainCtrl",
 		controllerAs:"App"
 		}
 	)
 	.when("/Menu",
 			{
-		templateUrl:"/HelpYourselves/partials/MenuItems.html",
+		templateUrl:"partials/MenuItems.html",
 		controller:"MainCtrl",
 		controllerAs:"App"
 	}
 	)
 	.when("/Location",
 			{
-		templateUrl:"/HelpYourselves/partials/Location.html",
+		templateUrl:"partials/Location.html",
 		controller:"MainCtrl",
 		controllerAs:"App"
 	}
 	)
 	.when("/OrderOnline",{
-		templateUrl:"/HelpYourselves/partials/OrderOnline.html",
+		templateUrl:"partials/OrderOnline.html",
 		controller:"OrderOnlineCtrl",
 		controllerAs:"App"
 	}
 	)
 	.when("/Reviews",{
-		templateUrl:"/HelpYourselves/partials/Reviews.html",
+		templateUrl:"partials/Reviews.html",
 		controller:"MainCtrl",
 		controllerAs:"App"
 	}
 	)
 	.otherwise({
-		  Template:"oops"
+		  redirectTo:"/Menu"
 	  });
 });
