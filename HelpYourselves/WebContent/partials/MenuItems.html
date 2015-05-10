@@ -1,10 +1,10 @@
 <div>
 	<section class="menu-list" ng-repeat="food in menuItems">
 		<div class="menu-item">
-			<img class="item-image" ng-src="food.img" ng-if="food.img">
-			<div class="item-name" ng-bind="food.name"></div>
-			<div class="item-desc" ng-bind="food.description"></div>
-			<div class="item-price" ng-bind="food.price | currency"></div>
+			<img alt="food logo" class="item-image" ng-src="food.img" ng-if="food.img">
+			<h2><span class="item-name" ng-bind="food.name"></span></h2>
+			<h3><span class="item-desc" ng-bind="food.description"></span></h3>
+			<h3><span class="item-price" ng-bind="food.price | currency"></span></h3>
 		</div>
 	</section>
 </div>
