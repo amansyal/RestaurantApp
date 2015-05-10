@@ -28,9 +28,9 @@ import com.beust.jcommander.Parameter;
 public class YelpAPI {
 
   private static final String API_HOST = "api.yelp.com";
-  private static final String DEFAULT_TERM = "menu";
+  private static final String DEFAULT_TERM = "food";
   private static final String DEFAULT_LOCATION = "San Francisco, CA";
-  private static final int SEARCH_LIMIT = 3;
+  private static final int SEARCH_LIMIT = 20;
  // private static int  SEARCH_LIMIT;
   // private static final int SEARCH_LIMIT = 3;
 
@@ -126,8 +126,9 @@ public class YelpAPI {
    * 
    * @param yelpApi <tt>YelpAPI</tt> service instance
    * @param yelpApiCli <tt>YelpAPICLI</tt> command line arguments
+ * @return 
    */
-  public void queryAPI(YelpAPI yelpApi, YelpAPICLI yelpApiCli) {
+  public String queryAPI(YelpAPI yelpApi, YelpAPICLI yelpApiCli) {
     String searchResponseJSON =
         yelpApi.searchForBusinessesByLocation(yelpApiCli.term, yelpApiCli.location);
 
@@ -143,6 +144,15 @@ public class YelpAPI {
 
     JSONArray businesses = (JSONArray) response.get("businesses");
     JSONObject firstBusiness = (JSONObject) businesses.get(0);
+    JSONObject LastBusiness = (JSONObject) businesses.get(19);
+    String lastBusinessID = firstBusiness.get("id").toString();
+    System.out.println("las tbusiness" + LastBusiness);
+    System.out.println("first tbusiness" + firstBusiness);
+
+    System.out.println(String.format(
+        "%s businesses found, querying business info for the top result \"%s\" ...",
+        businesses.size(), lastBusinessID));
+
     String firstBusinessID = firstBusiness.get("id").toString();
     System.out.println(String.format(
         "%s businesses found, querying business info for the top result \"%s\" ...",
@@ -152,6 +162,7 @@ public class YelpAPI {
     String businessResponseJSON = yelpApi.searchByBusinessId(firstBusinessID.toString());
     System.out.println(String.format("Result for business \"%s\" found:", firstBusinessID));
     System.out.println(businessResponseJSON);
+    return businessResponseJSON;
   }
 
   /**

@@ -41,6 +41,8 @@ public class YelpDataLoaderServlet extends HttpServlet {
 		System.out.println("in main of yelp api");
 		    YelpAPI yelpApi = new YelpAPI(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET);
 		    yelpApi.queryAPI(yelpApi, yelpApiCli);
+		    
+		    
 	}
 
 
