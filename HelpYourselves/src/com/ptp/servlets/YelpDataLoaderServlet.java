@@ -8,12 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Servlet implementation class YelpDataLoaderServlet
  */
 @WebServlet("/YelpDataLoaderServlet")
 public class YelpDataLoaderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = LoggerFactory.getLogger(YelpDataLoaderServlet.class);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -37,7 +41,7 @@ public class YelpDataLoaderServlet extends HttpServlet {
 		YelpAPI.YelpAPICLI yelpApiCli = new YelpAPI.YelpAPICLI();
 
 		// JCommander obj = new JCommander(yelpApiCli);
-		System.out.println("in main of yelp api");
+		logger.info("in main of yelp api");
 		YelpAPI yelpApi = new YelpAPI(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET);
 		yelpApi.queryAPI(yelpApi, yelpApiCli);
 	}

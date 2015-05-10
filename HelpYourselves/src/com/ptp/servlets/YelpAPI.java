@@ -10,6 +10,8 @@ import org.scribe.model.Response;
 import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.oauth.OAuthService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.beust.jcommander.Parameter;
 import com.ptp.TwoStepOAuth;
@@ -28,13 +30,15 @@ import com.ptp.TwoStepOAuth;
  */
 public class YelpAPI {
 
+	private static final Logger logger = LoggerFactory.getLogger(YelpAPI.class);
 	private static final String API_HOST = "api.yelp.com";
 	private static final String DEFAULT_TERM = "menu";
 	private static final String DEFAULT_LOCATION = "San Francisco, CA";
 	private static final int SEARCH_LIMIT = 3;
 
 	private static final String SEARCH_PATH = "/v2/search";
-	private static final String BUSINESS_PATH = "/v2/business"; // "/v2/business/4eR6hYFJcBHoAqhuOS07ww";
+	private static final String BUSINESS_PATH = "/v2/business"; 
+	// static final String BUSINESS_PATH = "/v2/business/4eR6hYFJcBHoAqhuOS07ww";
 
 	/*
 	 * Update OAuth credentials below from the Yelp Developers API site:
@@ -97,7 +101,7 @@ public class YelpAPI {
 	 */
 	private OAuthRequest createOAuthRequest(String path) {
 		OAuthRequest request = new OAuthRequest(Verb.GET, "http://" + API_HOST + path);
-		System.out.println("Resqyest in OathRequest " + request);
+		logger.info("Resquest in OathRequest " + request);
 		return request;
 	}
 
@@ -108,7 +112,7 @@ public class YelpAPI {
 	 * @return <tt>String</tt> body of API response
 	 */
 	private String sendRequestAndGetResponse(OAuthRequest request) {
-		System.out.println("Querying " + request.getCompleteUrl() + " ...");
+		logger.info("Querying " + request.getCompleteUrl() + " ...");
 		service.signRequest(this.accessToken, request);
 		Response response = request.send();
 		return response.getBody();
@@ -129,22 +133,22 @@ public class YelpAPI {
 		try {
 			response = (JSONObject) parser.parse(searchResponseJSON);
 		} catch (ParseException pe) {
-			System.out.println("Error: could not parse JSON response:");
-			System.out.println(searchResponseJSON);
+			logger.warn("Error: could not parse JSON response:");
+			logger.info(searchResponseJSON);
 			System.exit(1);
 		}
 
 		JSONArray businesses = (JSONArray) response.get("businesses");
 		JSONObject firstBusiness = (JSONObject) businesses.get(0);
 		String firstBusinessID = firstBusiness.get("id").toString();
-		System.out.println(String.format(
+		logger.info(String.format(
 				"%s businesses found, querying business info for the top result \"%s\" ...",
 				businesses.size(), firstBusinessID));
 
 		// Select the first business and display business details
 		String businessResponseJSON = yelpApi.searchByBusinessId(firstBusinessID.toString());
-		System.out.println(String.format("Result for business \"%s\" found:", firstBusinessID));
-		System.out.println(businessResponseJSON);
+		logger.info(String.format("Result for business \"%s\" found:", firstBusinessID));
+		logger.info(businessResponseJSON);
 	}
 
 	/**
@@ -168,7 +172,7 @@ public class YelpAPI {
 	/*
 	 * public static void main(String[] args) { YelpAPICLI yelpApiCli = new
 	 * YelpAPICLI(); new JCommander(yelpApiCli, args);
-	 * System.out.println("in main of yelp api"); YelpAPI yelpApi = new
+	 * logger.info("in main of yelp api"); YelpAPI yelpApi = new
 	 * YelpAPI(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET);
 	 * queryAPI(yelpApi, yelpApiCli); }
 	 */
