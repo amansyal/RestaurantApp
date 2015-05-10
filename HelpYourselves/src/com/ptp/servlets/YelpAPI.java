@@ -32,13 +32,14 @@ public class YelpAPI {
 
 	private static final Logger logger = LoggerFactory.getLogger(YelpAPI.class);
 	private static final String API_HOST = "api.yelp.com";
-	private static final String DEFAULT_TERM = "menu";
+	private static final String DEFAULT_TERM = "food";
 	private static final String DEFAULT_LOCATION = "San Francisco, CA";
-	private static final int SEARCH_LIMIT = 3;
+	private static final int SEARCH_LIMIT = 20;
+	// private static final int SEARCH_LIMIT = 3;
 
 	private static final String SEARCH_PATH = "/v2/search";
-	private static final String BUSINESS_PATH = "/v2/business"; 
-	// static final String BUSINESS_PATH = "/v2/business/4eR6hYFJcBHoAqhuOS07ww";
+	private static final String BUSINESS_PATH = "/v2/business";
+	// private static final String BUSINESS_PATH="/v2/business/4eR6hYFJcBHoAqhuOS07ww";
 
 	/*
 	 * Update OAuth credentials below from the Yelp Developers API site:
@@ -125,8 +126,9 @@ public class YelpAPI {
 	 * @param yelpApi <tt>YelpAPI</tt> service instance
 	 * @param yelpApiCli <tt>YelpAPICLI</tt> command line arguments
 	 */
-	public void queryAPI(YelpAPI yelpApi, YelpAPICLI yelpApiCli) {
-		String searchResponseJSON = yelpApi.searchForBusinessesByLocation(yelpApiCli.term, yelpApiCli.location);
+	public String queryAPI(YelpAPI yelpApi, YelpAPICLI yelpApiCli) {
+		String searchResponseJSON = yelpApi.searchForBusinessesByLocation(yelpApiCli.term,
+				yelpApiCli.location);
 
 		JSONParser parser = new JSONParser();
 		JSONObject response = null;
@@ -140,6 +142,15 @@ public class YelpAPI {
 
 		JSONArray businesses = (JSONArray) response.get("businesses");
 		JSONObject firstBusiness = (JSONObject) businesses.get(0);
+		JSONObject LastBusiness = (JSONObject) businesses.get(19);
+		String lastBusinessID = firstBusiness.get("id").toString();
+		logger.info("last business" + LastBusiness);
+		logger.info("first tbusiness" + firstBusiness);
+
+		logger.info(String.format(
+				"%s businesses found, querying business info for the top result \"%s\" ...",
+				businesses.size(), lastBusinessID));
+
 		String firstBusinessID = firstBusiness.get("id").toString();
 		logger.info(String.format(
 				"%s businesses found, querying business info for the top result \"%s\" ...",
@@ -149,6 +160,7 @@ public class YelpAPI {
 		String businessResponseJSON = yelpApi.searchByBusinessId(firstBusinessID.toString());
 		logger.info(String.format("Result for business \"%s\" found:", firstBusinessID));
 		logger.info(businessResponseJSON);
+		return businessResponseJSON;
 	}
 
 	/**
