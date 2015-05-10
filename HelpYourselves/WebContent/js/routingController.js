@@ -32,6 +32,11 @@ $routeProvider.when("/",
 		controllerAs:"App"
 	}
 	)
+	.when("/ReviewOrder",{
+		templateUrl:"/HelpYourselves/partials/ReviewOrder.html",
+		controller:"OrderOnlineCtrl",
+		controllerAs:"App"
+	})
 	.otherwise({
 		  Template:"oops"
 	  });
