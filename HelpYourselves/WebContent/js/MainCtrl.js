@@ -1,3 +1,7 @@
-angular.module('App').controller('MainCtrl', MainCtrl);
+/** MainCtrl.js **/
+/*global angular */
+function MainCtrl($scope) {
+    'use strict';
+}
 
-function MainCtrl($scope){};
+angular.module('App').controller('MainCtrl', MainCtrl);

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div ng-controller="OrderOnlineCtrl">
+		<p align="center">Order Online</p>
+		<table id="foodItem" align="center">
+			<tr>
+				<th>Food Items</th>
+				<th>Ingredients</th>
+				<th>Price</th>
+				<th>Select</th>
+			</tr>
+			<tr ng-repeat="food in menuItems">
+				<td ng-bind="food.name"></td>
+				<td ng-bind="food.description"></td>
+				<td ng-bind="food.price | currency"></td>
+				<td><input type="checkbox" name="foodSelected" ng-model="food.selected"></td>
+			</tr>
+		</table>
+		<table align="center">
+			<td>
+				<button class="btn" ng-click="orderOnline()" align="center">Order Online</button>
+			</td>
+		</table>
+	</div>
+</body>
+</html>

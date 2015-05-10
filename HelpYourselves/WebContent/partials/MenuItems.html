@@ -1,10 +1,10 @@
-<div>
-	<section class="menu-list">
+<div ng-controller="MenuCtrl">
+	<section class="menu-list" ng-repeat="food in menuItems">
 		<div class="menu-item">
-			<img class="item-image" src="http://www.gimmegrub.com/restaurant/1604/images/Caesar_Salad.JPG">
-			<div class="item-name">Caesar Salad</div>
-			<div class="item-desc">A salad of romaine lettuce and croutons dressed with parmesan cheese, lemon juice, olive oil, egg, Worcestershire sauce, garlic, and black pepper.</div>
-			<div class="item-price">$35</div>
+			<img class="item-image" ng-src="food.img" ng-if="food.img">
+			<div class="item-name" ng-bind="food.name"></div>
+			<div class="item-desc" ng-bind="food.description"></div>
+			<div class="item-price" ng-bind="food.price | currency"></div>
 		</div>
 	</section>
 </div>
