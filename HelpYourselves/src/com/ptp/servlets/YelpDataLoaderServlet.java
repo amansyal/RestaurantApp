@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory;
  * Servlet implementation class YelpDataLoaderServlet
  */
 @WebServlet("/YelpDataLoaderServlet")
-public class YelpDataLoaderServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class YelpDataLoaderServlet extends AbstractServlet {
+	private static final long serialVersionUID = -8724474301055392057L;
 	private static final Logger logger = LoggerFactory.getLogger(YelpDataLoaderServlet.class);
 
 	/**
@@ -44,6 +44,7 @@ public class YelpDataLoaderServlet extends HttpServlet {
 		logger.info("in main of yelp api");
 		YelpAPI yelpApi = new YelpAPI(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET);
 		yelpApi.queryAPI(yelpApi, yelpApiCli);
+		// sendResponse(request, response, "");
 	}
 
 }
