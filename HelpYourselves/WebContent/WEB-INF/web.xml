@@ -10,8 +10,8 @@
     <servlet-name>YelpDataLoaderService</servlet-name>
     <servlet-class>com.ptp.servlets.YelpDataLoaderService</servlet-class>
   </servlet>
-  <servlet-mapping>
+<!--   <servlet-mapping>
     <servlet-name>YelpDataLoaderService</servlet-name>
     <url-pattern>/*</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
 </web-app>
