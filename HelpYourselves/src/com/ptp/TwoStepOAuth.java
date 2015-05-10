@@ -1,4 +1,4 @@
-package com.ptp.servlets;
+package com.ptp;
 
 import org.scribe.builder.api.DefaultApi10a;
 import org.scribe.model.Token;
