@@ -85,3 +85,13 @@ body > footer {
 .item-name {
     vertical-align: top;
 }
+
+.background {
+	
+	background:white;
+	opacity: .6;
+	margin-left: 20px;
+	margin-right: 20px;
+	
+	
+}
