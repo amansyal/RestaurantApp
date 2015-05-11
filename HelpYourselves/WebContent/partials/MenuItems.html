@@ -1,7 +1,7 @@
 <div>
 	<section class="menu-list" ng-repeat="food in menuItems">
 		<div class="menu-item">
-			<img alt="food logo" class="item-image" ng-src="food.img" ng-if="food.img">
+			<img alt="food logo" class="item-image" ng-src="food.imgSrc" ng-if="food.imgSrc">
 			<h2><span class="item-name" ng-bind="food.name"></span></h2>
 			<h3><span class="item-desc" ng-bind="food.description"></span></h3>
 			<h3><span class="item-price" ng-bind="food.price | currency"></span></h3>
